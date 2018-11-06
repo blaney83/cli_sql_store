@@ -8,7 +8,6 @@ const inquirer = require("inquirer");
 const chalk = require("chalk");
 const displayGoods = require("./displayGoods.js");
 const lowInventory = require("./lowInventory.js");
-const manager = require("./manager.js");
 const connection = mysql.createConnection({
     host: 'localhost',
     port: 3306,
@@ -17,7 +16,7 @@ const connection = mysql.createConnection({
     database: 'store_db'
 })
 
-function addToInventory() {
+function addToInventory(cb) {
     //run automatically to show availble goods
     displayGoods.displayGoods();
     //run automatically to show low inventory goods
@@ -58,7 +57,7 @@ function addToInventory() {
                 ], function(err){
                     if(err) throw err;
                     showG("\nProduct restocked!");
-                    setTimeout(addToInventory, 2000);
+                    setTimeout(cb, 2000);
                 })
             })
     });

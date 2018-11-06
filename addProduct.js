@@ -4,7 +4,6 @@ const mysql = require("mysql");
 const inquirer = require("inquirer");
 const chalk = require("chalk");
 const displayGoods = require("./displayGoods.js");
-const manager = require("./manager");
 const connection = mysql.createConnection({
     host: 'localhost',
     port: 3306,
@@ -13,7 +12,7 @@ const connection = mysql.createConnection({
     database: 'store_db'
 });
 
-function addProduct(){
+function addProduct(cb){
     connection.query("SELECT * FROM store", function (err, data) {
         productArr = [];
         if (err) throw err;
@@ -58,7 +57,7 @@ function addProduct(){
                 if(err) throw err;
                 displayGoods.displayGoods();
                 setTimeout(msg, 1500);
-                setTimeout(addProduct, 4000);
+                setTimeout(cb, 4000);
             })
         })
 }

@@ -2,6 +2,7 @@
 let idArr = [];
 let invArr = [];
 let priceArr = [];
+let salesArr = [];
 let productIndex;
 const mysql = require("mysql");
 const inquirer = require("inquirer");
@@ -25,6 +26,7 @@ function customer() {
             idArr.push(obj.id)
             invArr.push(obj.inventory);
             priceArr.push(obj.price);
+            salesArr.push(obj.sales)
         });
         //prompt for choosing item
         inquirer
@@ -46,10 +48,12 @@ function customer() {
                 let updatedInv = currentInv - resp.quantity;
                 let itemPrice = priceArr[productIndex];
                 let orderTotal = itemPrice * resp.quantity;
+                let newSales = salesArr[productIndex] + orderTotal;
                 connection.query("UPDATE store SET ? WHERE ?", 
                 [
                     {
-                        inventory: updatedInv
+                        inventory: updatedInv,
+                        sales: newSales
                     },
                     {
                         id: resp.product

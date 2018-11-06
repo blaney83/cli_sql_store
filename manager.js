@@ -6,13 +6,6 @@ const displayGoods = require("./displayGoods.js");
 const lowInventory = require("./lowInventory.js");
 const addToInventory = require("./addToInventory.js");
 const addProduct = require("./addProduct.js")
-const connection = mysql.createConnection({
-    host: 'localhost',
-    port: 3306,
-    user: 'root',
-    password: 'root',
-    database: 'store_db'
-})
 
 function manager() {
 
@@ -35,10 +28,10 @@ function manager() {
                     setTimeout(manager, 5000);
                     break;
                 case ("Add to Inventory"):
-                    addToInventory.addToInventory();
+                    addToInventory.addToInventory(manager);
                     break;
                 case ("Add New Product"):
-                    addProduct.addProduct();
+                    addProduct.addProduct(manager);
                     break;
             }
         })

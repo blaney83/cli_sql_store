@@ -13,7 +13,7 @@ let dataArr = [];
 function displayGoods(){
     connection.query('SELECT * FROM store', function(err, data){
         objectsToArray(data);
-        dataArr.unshift(["ID", "PRODUCT", "DEPARTMENT", "PRICE", "INVENTORY"]);
+        dataArr.unshift(["ID", "PRODUCT", "DEPARTMENT", "PRICE", "INVENTORY", "TOTAL SALES"]);
         output = table.table(dataArr);
         console.log(output)
     })
@@ -24,7 +24,7 @@ function objectsToArray(dataArray){
     dataArr = [];
     dataArray.forEach(function(obj){
         let itemArray = [];
-        itemArray.push(obj.id, obj.product, obj.department, obj.price, obj.inventory)
+        itemArray.push(obj.id, obj.product, obj.department, obj.price, obj.inventory, obj.sales)
         dataArr.push(itemArray);
     })
 }

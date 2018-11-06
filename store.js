@@ -25,7 +25,7 @@ function enterStore(){
         .prompt([
             {
                 type: "list",
-                message: "****WELCOME TO THE STORE****\nPlease identify yourself:",
+                message: "\n****WELCOME TO THE STORE****\nPlease identify yourself:",
                 choices: ["Customer", "Manager", "Supervisor"],
                 name: "identification"
             }
@@ -41,6 +41,7 @@ function enterStore(){
                     break;
                 case("Supervisor"):
                     show("WELCOME SUPE!");
+                    supervisor.supervisor(enterStore);
                     break;
             }
         })
